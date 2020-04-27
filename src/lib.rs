@@ -17,15 +17,15 @@ pub static WINDOWS: &'static [&'static str] = &[
 pub static ARTIFACTS: &'static [&'static str] = &["deps", "examples", "build", "incremental"];
 
 pub fn in_keywords(s: impl AsRef<str>) -> bool {
-    KEYWORDS.contains(s.as_ref())
+    KEYWORDS.contains(&s.as_ref())
 }
 
 pub fn in_windows(s: impl AsRef<str>) -> bool {
-    WINDOWS.contains(s.as_ref())
+    WINDOWS.contains(&s.as_ref())
 }
 
 pub fn in_artifacts(s: impl AsRef<str>) -> bool {
-    ARTIFACTS.contains(s.as_ref())
+    ARTIFACTS.contains(&s.as_ref())
 }
 
 pub fn is_reserved(s: impl AsRef<str>) -> bool {
