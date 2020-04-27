@@ -28,7 +28,22 @@ pub fn in_artifacts(s: impl AsRef<str>) -> bool {
     ARTIFACTS.contains(&s.as_ref())
 }
 
-pub fn is_reserved(s: impl AsRef<str>) -> bool {
+#[derive(Debug)]
+pub enum Reservation {
+    Keywords,
+    Windows,
+    Artifacts,
+}
+
+pub fn is_reserved(s: impl AsRef<str>) -> Result<(), Reservation> {
     let s = s.as_ref();
-    in_keywords(s) || in_windows(s) || in_artifacts(s)
+    if in_keywords(s) {
+        Err(Reservation::Keywords)
+    } else if in in_windows(s) {
+        Err(Reservation::Windows)
+    } else if in_artifacts(s) {
+        Err(Reservation::Artifacts)
+    } else {
+        Ok(())
+    }
 }
