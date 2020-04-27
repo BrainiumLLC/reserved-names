@@ -39,7 +39,7 @@ pub fn is_reserved(s: impl AsRef<str>) -> Result<(), Reservation> {
     let s = s.as_ref();
     if in_keywords(s) {
         Err(Reservation::Keywords)
-    } else if in in_windows(s) {
+    } else if in_windows(s) {
         Err(Reservation::Windows)
     } else if in_artifacts(s) {
         Err(Reservation::Artifacts)
