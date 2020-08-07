@@ -1,7 +1,15 @@
 [package]
 name = "reserved-names"
 version = "0.1.0"
-authors = ["Brainium Studios LLC"]
+authors = ["Francesca Lovebloom <francesca@brainiumstudios.com>"]
 edition = "2018"
+description = "The reserved name lists from cargo's `restricted_names.rs` in a convenient lil crate!"
+documentation = "https://docs.rs/reserved-names"
+repository = "https://github.com/BrainiumLLC/reserved-names"
+readme = "README.md"
+keywords = ["utility"]
+categories = ["rust-patterns"]
+license = "Apache-2.0/MIT"
+
 
 [dependencies]
