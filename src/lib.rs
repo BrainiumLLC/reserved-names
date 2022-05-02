@@ -1,5 +1,6 @@
-
 //! Taken from: https://github.com/rust-lang/cargo/blob/5fe8ab57e2a88ccaaab0821c306203eb19edf8fd/src/cargo/util/restricted_names.rs
+
+use thiserror::Error;
 
 pub static KEYWORDS: &'static [&'static str] = &[
     "Self", "abstract", "as", "async", "await", "become", "box", "break", "const", "continue",
@@ -37,11 +38,15 @@ pub fn in_primitive_types(s: impl AsRef<str>) -> bool {
     PRIMITIVE_TYPES.contains(&s.as_ref())
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
 pub enum Reservation {
+    #[error("identifier is a reserved keyword")]
     Keywords,
+    #[error("identifier uses a reserved windows keyword")]
     Windows,
+    #[error("identifier uses a reserved artifact")]
     Artifacts,
+    #[error("identifier uses a reserved primitive type")]
     PrimitiveType,
 }
 
