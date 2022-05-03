@@ -51,3 +51,12 @@ pub fn is_reserved(s: impl AsRef<str>) -> Result<(), Reservation> {
         Ok(())
     }
 }
+
+static PRIMITIVE_TYPES: &[&'static str] = &[
+    "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64", "u128", "usize", "f32",
+    "f64", "bool", "str",
+];
+
+pub fn in_primitive_types(s: impl AsRef<str>) -> bool {
+    PRIMITIVE_TYPES.contains(&s.as_ref())
+}
