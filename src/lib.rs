@@ -15,11 +15,6 @@ pub static WINDOWS: &'static [&'static str] = &[
     "com9", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9",
 ];
 
-static PRIMITIVE_TYPES: &[&'static str] = &[
-    "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64", "u128", "usize", "f32",
-    "f64", "bool", "str",
-];
-
 pub static ARTIFACTS: &'static [&'static str] = &["deps", "examples", "build", "incremental"];
 
 pub fn in_keywords(s: impl AsRef<str>) -> bool {
@@ -34,10 +29,6 @@ pub fn in_artifacts(s: impl AsRef<str>) -> bool {
     ARTIFACTS.contains(&s.as_ref())
 }
 
-pub fn in_primitive_types(s: impl AsRef<str>) -> bool {
-    PRIMITIVE_TYPES.contains(&s.as_ref())
-}
-
 #[derive(Debug, Error)]
 pub enum Reservation {
     #[error("identifier is a reserved keyword")]
@@ -46,8 +37,6 @@ pub enum Reservation {
     Windows,
     #[error("identifier uses a reserved artifact")]
     Artifacts,
-    #[error("identifier uses a reserved primitive type")]
-    PrimitiveType,
 }
 
 pub fn is_reserved(s: impl AsRef<str>) -> Result<(), Reservation> {
@@ -58,8 +47,6 @@ pub fn is_reserved(s: impl AsRef<str>) -> Result<(), Reservation> {
         Err(Reservation::Windows)
     } else if in_artifacts(s) {
         Err(Reservation::Artifacts)
-    } else if in_primitive_types(s) {
-        Err(Reservation::PrimitiveType)
     } else {
         Ok(())
     }
